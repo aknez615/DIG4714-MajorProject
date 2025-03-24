@@ -7,7 +7,7 @@ public class EndScreenScript : MonoBehaviour
 {
     public void BackToMainMenu()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene("MainMenu");
     }
     // Start is called before the first frame update
     void Start()
