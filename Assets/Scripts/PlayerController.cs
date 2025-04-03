@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float Speed = 3.0f; //Walking speed
     private Vector2 move;
 
+    [SerializeField] private Animator animator;
+
     public float health = 100f; //Max health
     private float currentHealth; //Current player health
     public Slider healthBar; //Setting up health bar UI
@@ -43,7 +45,12 @@ public class PlayerController : MonoBehaviour
 
         if (movement != Vector3.zero)
         {
+            animator.SetBool("isRunning", true);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
