@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements; //For UI stamina bar
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class PlayerController : MonoBehaviour
     public float staminaDrain = 10f; //How much stamina will drain per second while running
     public float staminaRegen = 5f; //Stamina regen per second
     public float staminaThreshold = 10f; //How much stamina is needed in order for player to run again
-    public Slider staminaBar; //Setting up stamina bar UI
+   
 
     public float health = 100f; //Max health
     private float currentHealth; //Current player health
-    public Slider healthBar; //Setting up health bar UI
+
 
 
     public Transform playerCamera; //Reference to current player camera (Cinemachine Virtual Camera)
@@ -43,8 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovementInput();
         HandleStamina();
-        UpdateStaminaUI();
-        UpdateHealthUI();
+
     }
 
     private void FixedUpdate()
@@ -110,13 +109,7 @@ public class PlayerController : MonoBehaviour
         currentStamina = Mathf.Clamp(currentStamina, 0, stamina);
     }
 
-    private void UpdateStaminaUI()
-    {
-        if (staminaBar != null)
-        {
-            staminaBar.value = currentStamina / stamina; //Update the slider UI with percentage of stamina
-        }
-    }
+
 
     public void HandleHealth(int enemyDamage)
     {
@@ -135,11 +128,5 @@ public class PlayerController : MonoBehaviour
         //No destroy gameobject yet due to not knowing if we are going to have a title screen or how player is going to die
     }
 
-    private void UpdateHealthUI()
-    {
-        if (healthBar != null)
-        {
-            healthBar.value = currentHealth / health; //Update the health bar UI with the percentage
-        }
-    }
+
 }
