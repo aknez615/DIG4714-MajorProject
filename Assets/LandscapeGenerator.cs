@@ -14,18 +14,23 @@ public class LandscapeGenerator : MonoBehaviour
     Mesh mesh;
     public int xSize;
     public int zSize;
+    float xOffset;
+    float zOffset;
 
     // Start is called before the first frame update
     void Start()
     {
+        xOffset = UnityEngine.Random.Range(0f,9999f);
+        zOffset = UnityEngine.Random.Range(0f,9999f);
+
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
-        CreateShape();
+        CreateLandscape();
         UpdateMesh();
     }
 
-    void CreateShape()
+    void CreateLandscape()
     {
        vertices = new UnityEngine.Vector3[(xSize + 1) * (zSize + 1)];
 
@@ -33,7 +38,7 @@ public class LandscapeGenerator : MonoBehaviour
        {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * 0.1f, z * 0.1f) * 3f;
+                float y = Mathf.PerlinNoise((xOffset + x) * 0.1f, (zOffset + z) * 0.1f) * 3f;
                 vertices[i] = new UnityEngine.Vector3(x,y,z);
                 i++;
             }
@@ -79,15 +84,4 @@ public class LandscapeGenerator : MonoBehaviour
         mesh.RecalculateNormals();
         mesh.uv = uvs;
     }
-    /*
-    void OnDrawGizmos()
-    {
-        if (vertices == null)
-            return;
-        for (int i = 0; i < vertices.Length; i++)
-        {
-            Gizmos.DrawSphere(vertices[i], 0.1f);
-        }
-    }
-    */
 }
